@@ -33,6 +33,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->withPivot(['enrolled_at', 'status', 'result', 'completed_at'])->withTimestamps();
+    }
+
     /**
      * Get the attributes that should be cast.
      *
