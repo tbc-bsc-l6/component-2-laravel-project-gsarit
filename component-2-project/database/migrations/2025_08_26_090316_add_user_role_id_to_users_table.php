@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_role_id');
-            $table->foreign('user_role_id')->references('id')->on('user_roles')->onDelete('cascade');
+            // Make the column nullable to avoid integrity errors with existing data
+            $table->unsignedBigInteger('user_role_id')->nullable()->after('id');
+
+            // Add the foreign key constraint
+            $table->foreign('user_role_id')
+                  ->references('id')->on('user_roles')
+                  ->onDelete('cascade');
         });
     }
 
