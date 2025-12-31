@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Module;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserRole::class);
     }
+
+
+
+public function modules()
+{
+    return $this->belongsToMany(Module::class)
+        ->withPivot(['enrolled_at', 'pass_status', 'completed_at'])
+        ->withTimestamps();
+}
+
 }
