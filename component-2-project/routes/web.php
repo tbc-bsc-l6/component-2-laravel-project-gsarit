@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\StudentModuleController;
+
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,5 +31,30 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/student/modules/{module}/enrol', [StudentModuleController::class, 'enrol'])
         ->name('student.modules.enrol');
 });
+
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
+
+    Route::post('/admin/users/{user}/role',
+        [AdminController::class, 'changeRole'])
+        ->name('admin.users.role');
+
+    Route::post('/admin/modules/{module}/toggle',
+        [AdminController::class, 'toggleModule'])
+        ->name('admin.modules.toggle');
+
+    Route::post('/admin/modules/{module}/assign-teacher',
+        [AdminController::class, 'assignTeacher'])
+        ->name('admin.modules.assignTeacher');
+
+    Route::post('/admin/modules/{module}/remove-student/{student}',
+        [AdminController::class, 'removeStudent'])
+        ->name('admin.modules.removeStudent');
+});
+
 
 require __DIR__.'/auth.php';
