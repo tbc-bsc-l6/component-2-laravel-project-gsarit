@@ -13,13 +13,28 @@ return new class extends Migration
     {
         Schema::create('module_user', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('module_id')
+                  ->constrained()
+                  ->cascadeOnDelete();
+
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->cascadeOnDelete();
+
+            $table->timestamp('enrolled_at')->nullable();
+            $table->enum('pass_status', ['PASS', 'FAIL'])->nullable();
+            $table->timestamp('completed_at')->nullable();
+
             $table->timestamps();
+
+            $table->unique(['module_id', 'user_id']);
         });
     }
 
     /**
-     * Reverse the migrations.
-     */
+      * Reverse the migrations.
+      */
     public function down(): void
     {
         Schema::dropIfExists('module_user');
