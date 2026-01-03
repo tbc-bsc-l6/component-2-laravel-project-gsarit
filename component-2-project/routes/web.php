@@ -59,10 +59,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('admin.modules.removeStudent');
 });
 
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/teacher/modules', [TeacherModuleController::class, 'index'])
         ->name('teacher.modules.index');
+
+    Route::get('/teacher/modules/{module}', [TeacherModuleController::class, 'show'])
+        ->name('teacher.modules.show');
+
+    Route::post('/teacher/modules/{module}/grade/{student}',
+        [TeacherModuleController::class, 'grade'])
+        ->name('teacher.modules.grade');
 });
 
 
