@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentModuleController;
 
 use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\TeacherModuleController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -54,6 +57,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/modules/{module}/remove-student/{student}',
         [AdminController::class, 'removeStudent'])
         ->name('admin.modules.removeStudent');
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/teacher/modules', [TeacherModuleController::class, 'index'])
+        ->name('teacher.modules.index');
 });
 
 
