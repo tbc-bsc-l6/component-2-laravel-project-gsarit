@@ -12,7 +12,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
+
+
+Route::get('/About', function () {
+    return view('About');
+});
+
+
+Route::get('/Contact', function () {
+    return view('Contact');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -75,3 +87,4 @@ Route::middleware(['auth'])->group(function () {
 
 
 require __DIR__.'/auth.php';
+
