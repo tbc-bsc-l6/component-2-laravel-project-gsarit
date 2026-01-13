@@ -25,7 +25,7 @@ class StudentModuleController extends Controller
 
         $enrolledModules = $student->modules;
 
-        return view('student.modules.index', compact('availableModules', 'enrolledModules'));
+        return view('student.index', compact('availableModules', 'enrolledModules'));
     }
 
     // Enrol student into module

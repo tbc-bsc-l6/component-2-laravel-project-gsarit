@@ -16,13 +16,13 @@ class TeacherModuleController extends Controller
         // assuming teacher_id exists on modules table
         $modules = Module::where('teacher_id', $teacher->id)->get();
 
-        return view('teacher.modules.index', compact('modules'));
+        return view('teacher.index', compact('modules'));
     }
 
     // Show students in a module
     public function show(Module $module)
     {
-        return view('teacher.modules.show', compact('module'));
+        return view('teacher.show', compact('module'));
     }
 
     // Set PASS / FAIL
